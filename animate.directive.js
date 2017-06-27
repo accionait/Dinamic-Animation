@@ -30,6 +30,7 @@
             scope.$watch('trigger', function(newValue, oldValue){
                 if(newValue.length) {
                     for (var i = 0; i < newValue.length; i++) {
+                        console.log("newValue " + newValue + "   oldValue " + oldValue);
 
                         if(newValue[i] == true) {
                             if (scope.time != undefined) {
@@ -81,7 +82,7 @@
                 }
                 else
                 {
-                    if(newValue == true) {
+                    if(newValue == true){
                         if (scope.time != undefined && scope.time != null && scope.time != "") {
                             var animation = scope.animation;
                             var out = scope.out;
