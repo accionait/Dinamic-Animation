@@ -14,7 +14,8 @@
                 animation: '=',
                 time: '=',
                 out: '=',
-                init: '='
+                init: '=',
+                onAnimation: '='
             },
             link: link
         };
@@ -22,20 +23,12 @@
         return directive;
 
         function link(scope, element, attrs){
-
+            scope.onAnimation = false;
             //TODO hide post animacion
             if(scope.init) {
                 element.addClass('ng-hide');
             }
             scope.$watch('trigger', function(newValue, oldValue){
-                /*if (scope.time!= undefined){
-                    console.log("scope.time!= undefined");
-                    console.log(scope.time);
-                    console.log(newValue);
-                    console.log(scope.animation);
-                    console.log(scope.infinite);
-                }*/
-                console.log(newValue);
                 if(newValue.length) {
                     for (var i = 0; i < newValue.length; i++) {
 
@@ -100,6 +93,7 @@
                             }
                             else {
                                 setTimeout(function () {
+                                    console.log(animation + out);
                                     applyClass(animation, out);
                                 }, scope.time);
                             }
@@ -112,6 +106,7 @@
             });
 
             function applyClass(animation, out) {
+                scope.onAnimation = true;
                 var animationAux = animation;
                 var outAux = out;
                 var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
@@ -120,27 +115,18 @@
                 {
                     element.removeClass('ng-hide');
                 }
+
                 if(!element.hasClass('ng-hide')) {
                     element.addClass('animated ' + animationAux).one(animationEnd, function () {
                         element.removeClass('animated ' + animationAux);
-
                         if (outAux == true) {
                             element.addClass('ng-hide');
                         }
+                        scope.onAnimation = false;
                     });
                 }
             }
-
         }
-
-        /**
-         * @name timeFromTo
-         * @desc Arma el array de horas, cada 1 hora en un intervalo de tiempo dado
-         * @param {Number} timeFrom Hora desde que inicia el período de tiempo
-         * @param {Number} timeTo Hora hasta que finaliza el período de tiempo
-         * @return {Array}
-         */
-
     }
 })();/**
  * Created by matias.serrano on 21/6/2017.
