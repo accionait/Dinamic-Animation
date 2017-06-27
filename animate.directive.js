@@ -23,7 +23,6 @@
         return directive;
 
         function link(scope, element, attrs){
-            scope.onAnimation = false;
             //TODO hide post animacion
             if(scope.init) {
                 element.addClass('ng-hide');
