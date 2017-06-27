@@ -92,7 +92,6 @@
                             }
                             else {
                                 setTimeout(function () {
-                                    console.log(animation + out);
                                     applyClass(animation, out);
                                 }, scope.time);
                             }
@@ -118,10 +117,11 @@
                 if(!element.hasClass('ng-hide')) {
                     element.addClass('animated ' + animationAux).one(animationEnd, function () {
                         element.removeClass('animated ' + animationAux);
+                        scope.onAnimation = false;
+                        scope.$apply();
                         if (outAux == true) {
                             element.addClass('ng-hide');
                         }
-                        scope.onAnimation = false;
                     });
                 }
             }
