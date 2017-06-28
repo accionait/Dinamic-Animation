@@ -24,12 +24,12 @@
 
         function link(scope, element, attrs){
             //TODO hide post animacion
-            debugger;
+
             if(scope.init) {
                 element.addClass('ng-hide');
             }
             scope.$watch('trigger', function(newValue, oldValue){
-                debugger;
+
                 if(newValue != undefined) {
                     if (newValue.length) {
                         for (var i = 0; i < newValue.length; i++) {
@@ -105,7 +105,7 @@
             });
 
             function applyClass(animation, out) {
-                debugger;
+
                 scope.onAnimation = true;
                 var animationAux = animation;
                 var outAux = out == undefined ? false : out;
@@ -118,13 +118,14 @@
 
                 if(!element.hasClass('ng-hide')) {
                     element.addClass('animated ' + animationAux).one(animationEnd, function () {
-                        debugger;
+
                         element.removeClass('animated ' + animationAux);
-                        scope.onAnimation = false;
-                        scope.$apply();
+
                         if (outAux == true) {
                             element.addClass('ng-hide');
                         }
+                        scope.onAnimation = false;
+                        scope.$apply();
                     });
                 }
             }
